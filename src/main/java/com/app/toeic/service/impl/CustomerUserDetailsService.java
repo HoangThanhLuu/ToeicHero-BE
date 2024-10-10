@@ -1,4 +1,4 @@
-package com.app.toeic.service;
+package com.app.toeic.service.impl;
 
 import com.app.toeic.model.UserAccount;
 import com.app.toeic.repository.IUserAccountRepository;
