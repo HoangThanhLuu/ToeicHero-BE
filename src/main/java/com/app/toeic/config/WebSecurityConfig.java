@@ -32,7 +32,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/user/**").permitAll()
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/superadmin/**").hasAuthority("SUPERADMIN")
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 );
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
