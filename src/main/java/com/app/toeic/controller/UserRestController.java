@@ -49,4 +49,14 @@ public class UserRestController {
     public ResponseVO updateAvatar(@Valid @RequestBody UserUpdateAvatarDto userUpdateAvatarDto) {
         return userService.updateAvatar(userUpdateAvatarDto.getEmail(), userUpdateAvatarDto.getAvatar());
     }
+
+    @PostMapping("/get-profile")
+    public ResponseVO getProfile(@RequestBody BearerToken token) {
+        return userService.getProfile(token.getAccessToken());
+    }
+
+    @GetMapping("/test")
+    public ResponseVO test() {
+        return new ResponseVO(Boolean.TRUE, "test", "Get assets successfully");
+    }
 }

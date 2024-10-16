@@ -101,4 +101,11 @@ public class UserServiceImpl implements UserService {
         iUserRepository.save(user);
         return ResponseVO.builder().success(Boolean.TRUE).data(null).message("Cập nhật avatar thành công!").build();
     }
+
+    @Override
+    public ResponseVO getProfile(String token) {
+        var email = jwtUtilities.extractUsername(token);
+        var user = iUserRepository.findByEmail(email).orElseThrow(() -> new AppException(HttpStatus.SEE_OTHER, "Email này chưa đăng ký tài khoản!"));
+        return ResponseVO.builder().success(Boolean.TRUE).data(user).message("Lấy thông tin thành công!").build();
+    }
 }

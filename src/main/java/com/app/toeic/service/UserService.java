@@ -22,4 +22,6 @@ public interface UserService {
     ResponseVO updateProfile(String email, String fullName, String password);
 
     ResponseVO updateAvatar(String email, String avatar);
+
+    ResponseVO getProfile(String token);
 }
