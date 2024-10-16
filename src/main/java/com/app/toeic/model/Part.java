@@ -12,37 +12,31 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "question")
-@Setter
-@Getter
-@AllArgsConstructor
+@Table(name = "part")
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Builder
-public class Question implements Serializable {
+public class Part {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer questionId;
-    private String questionNumber;
+    private Integer partId;
+    private String partName;
+    private String partCode;
     @Column(columnDefinition = "TEXT")
-    private String questionContent;
+    private String partImage;
     @Column(columnDefinition = "TEXT")
-    private String paragraph1;
+    private String partAudio;
     @Column(columnDefinition = "TEXT")
-    private String paragraph2;
-    @Column(columnDefinition = "TEXT")
-    private String questionImage;
-    @Column(columnDefinition = "TEXT")
-    private String questionAudio;
-    private String answerA;
-    private String answerB;
-    private String answerC;
-    private String answerD;
-    private String correctAnswer;
-
+    private String partContent;
+    private int numberOfQuestion;
+    private String status = "ACTIVE";
     @JsonIgnore
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -52,9 +46,15 @@ public class Question implements Serializable {
     private LocalDateTime updatedAt;
 
     @ManyToOne
-    @JoinColumn(name = "part_id")
+    @JoinColumn(name = "exam_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @org.hibernate.annotations.Index(name = "part_id_index")
+    @org.hibernate.annotations.Index(name = "exam_id_index")
     @JsonBackReference
-    private Part part;
+    private Exam exam;
+
+    @OneToMany(mappedBy = "part", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JsonIgnore
+    @OrderBy("questionNumber ASC")
+    private Set<Question> questions = new HashSet<>();
 }
