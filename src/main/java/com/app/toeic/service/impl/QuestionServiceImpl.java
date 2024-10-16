@@ -1,15 +1,18 @@
 package com.app.toeic.service.impl;
 
+import com.app.toeic.exception.AppException;
 import com.app.toeic.model.Part;
 import com.app.toeic.model.Question;
 import com.app.toeic.repository.IQuestionRepository;
 import com.app.toeic.response.ResponseVO;
 import com.app.toeic.service.QuestionService;
+import com.app.toeic.util.HttpStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -42,4 +45,23 @@ public class QuestionServiceImpl implements QuestionService {
     public void removeQuestionByPart(Part part) {
         questionRepository.deleteAllByPart(part);
     }
+
+    @Override
+    public Question findById(Integer id) {
+        return questionRepository.findById(id)
+                .orElseThrow(() -> new AppException(HttpStatus.NOT_FOUND, "Không tìm thấy câu hỏi!"));
+    }
+
+    @Override
+    public void saveQuestion(Question question) {
+        questionRepository.save(question);
+    }
 }
+
+
+
+
+
+
+
+
