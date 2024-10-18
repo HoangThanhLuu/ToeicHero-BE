@@ -9,13 +9,13 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "user_password_log")
+@Table(name = "user_account_password_log")
 @Getter
 @Setter
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
-public class UserPasswordLog implements Serializable {
+public class UserAccountPasswordLog implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,6 @@ public class UserPasswordLog implements Serializable {
     private String country;
     private String lastUpdatedBy;
     private String lastIpAddress;
-
 
     @CreationTimestamp
     private LocalDateTime createdAt;
