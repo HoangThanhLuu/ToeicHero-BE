@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface KummunicateBotRepo extends JpaRepository<KommunicateBot, Integer> {
+public interface KommunicateBotRepo extends JpaRepository<KommunicateBot, Integer> {
     Optional<KommunicateBot> findByAppId(String appId);
 
     List<KommunicateBot> findAllByAppIdNot(String appId);
