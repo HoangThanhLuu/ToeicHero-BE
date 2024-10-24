@@ -1,4 +1,4 @@
-package com.app.toeic.external.service;
+package com.app.toeic.firebase.service;
 
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,6 +1,6 @@
-package com.app.toeic.external.service.impl;
+package com.app.toeic.firebase.service.impl;
 
-import com.app.toeic.external.service.FirebaseStorageService;
+import com.app.toeic.firebase.service.FirebaseStorageService;
 import com.app.toeic.util.URLHelper;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.storage.*;
