@@ -1,29 +1,21 @@
-package com.app.toeic.send_sms.controller;
+package com.app.toeic.stringee.controller;
 
-import com.app.toeic.chatai.model.Message;
-import com.app.toeic.chatai.payload.ChatRequest;
-import com.app.toeic.chatai.response.ChatResponse;
-import com.app.toeic.send_sms.payload.Sms;
-import com.app.toeic.send_sms.payload.SmsPayload;
-import com.app.toeic.send_sms.payload.SmsText;
-import com.app.toeic.send_sms.response.SmsResponse;
+import com.app.toeic.stringee.payload.Sms;
+import com.app.toeic.stringee.payload.SmsPayload;
+import com.app.toeic.stringee.payload.SmsText;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
 import java.security.Key;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -34,29 +26,30 @@ public class SendSmsController {
     RestTemplate restTemplate;
 
     @PostMapping("send")
-    public Object sendSms(@RequestBody String phoneTo) {
+    public Object sendSms(
+            @RequestParam("phoneTo") String phoneTo,
+            @RequestParam("msg") String msg,
+            @RequestParam("auth") String auth
+    ) {
         var payload = SmsPayload.builder().build();
         payload.getSms().add(
                 Sms.builder()
                         .to(phoneTo)
-                        .from("GSMS")
-                        .text(SmsText.builder()
-                                .template(5689)
-                                .params(new String[]{"123456"})
-                                .build())
+                        .from("842471005352")
+                        .text(msg)
                         .build()
         );
         HttpHeaders headers = new HttpHeaders();
         headers.set(
                 "X-STRINGEE-AUTH",
-                "eyJjdHkiOiJzdHJpbmdlZS1hcGk7dj0xIiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJqdGkiOiJTSy4wLnFueUxHSkVZVmZoZmkwVEpPMXVFeVg2ZlFyTVZzUmw3LTE3MTMxNjgwMTEiLCJpc3MiOiJTSy4wLnFueUxHSkVZVmZoZmkwVEpPMXVFeVg2ZlFyTVZzUmw3IiwiZXhwIjoxNzEzMjU0NDExLCJyZXN0X2FwaSI6dHJ1ZX0.NX65uCNIUI9pZ_WC8J0GYCU1cJVNRfKtv5GpDsXH12k"
+                auth
         );
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         // create a request
         HttpEntity<SmsPayload> httpEntity = new HttpEntity<>(payload, headers);
         ResponseEntity<Object> responseEntity = restTemplate.postForEntity(
-                "https://api.stringee.com/v1/sms",
+                "https://api.stringee.com/v1/sms/send",
                 httpEntity,
                 Object.class
         );

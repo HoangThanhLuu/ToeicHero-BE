@@ -1,4 +1,4 @@
-package com.app.toeic.send_sms.payload;
+package com.app.toeic.stringee.payload;
 
 
 import lombok.AllArgsConstructor;

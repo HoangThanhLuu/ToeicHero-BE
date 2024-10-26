@@ -1,5 +1,4 @@
-package com.app.toeic.send_sms.response;
-
+package com.app.toeic.stringee.payload;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SmsResponse {
-    int smsSent;
-    List<SmsResult> results;
+public class CallPayload {
+    CallFromPayload from;
+    List<CallToPayload> to;
+    String answer_url;
+    List<CallActionPayload> actions;
 }

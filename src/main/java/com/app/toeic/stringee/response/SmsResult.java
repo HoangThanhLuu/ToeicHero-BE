@@ -1,4 +1,5 @@
-package com.app.toeic.send_sms.payload;
+package com.app.toeic.stringee.response;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SmsText {
-    int template;
-    String[] params;
+public class SmsResult {
+    int price;
+    int smsType;
+    int r;
+    String msg;
 }
