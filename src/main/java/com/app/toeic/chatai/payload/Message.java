@@ -1,4 +1,4 @@
-package com.app.toeic.chatai.model;
+package com.app.toeic.chatai.payload;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
