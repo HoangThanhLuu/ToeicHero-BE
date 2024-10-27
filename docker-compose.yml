@@ -1,0 +1,14 @@
+version: '3'
+services:
+  spring-app:
+    container_name: toeicute-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_HOST=172.31.98.209
+      - DB_USERNAME=root
+      - DB_PASSWORD=1234
