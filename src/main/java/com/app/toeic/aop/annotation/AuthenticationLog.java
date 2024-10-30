@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Accessibility {
+public @interface AuthenticationLog {
     String activity() default StringUtils.EMPTY;
     String description() default StringUtils.EMPTY;
 }
