@@ -1,4 +1,4 @@
-package com.app.toeic.external.controller.admin;
+package com.app.toeic.external.controller;
 
 
 import com.app.toeic.external.response.ResponseVO;
