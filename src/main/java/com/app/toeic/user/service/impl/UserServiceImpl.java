@@ -19,6 +19,7 @@ import com.app.toeic.user.service.UserService;
 import com.app.toeic.util.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.Cookie;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -415,7 +416,8 @@ public class UserServiceImpl implements UserService {
                 new Object[]{captcha, cookie.isPresent() ? cookie.get().getValue() : "null", captchaDecrypt}
         );
 
-        return captchaDecrypt.equals(captcha.trim());
+        return cookie.isPresent() && AESUtils.decrypt(cookie.get().getValue()).equals(captcha.trim());
+
     }
 
     @Override

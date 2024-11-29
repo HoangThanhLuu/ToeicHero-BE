@@ -82,6 +82,7 @@ public class UserController {
     @AuthenticationLog(activity = Constant.LOGIN, description = "Login with email and password")
     public ResponseVO authenticate(@Valid @RequestBody LoginDTO loginDto, HttpServletRequest request) {
         log.log(Level.INFO, MessageFormat.format("Login: {0}", JsonConverter.convertObjectToJson(loginDto)));
+
         if (!userService.isValidCaptcha(request, loginDto.getCaptcha())) {
             throw new AppException(HttpStatus.BAD_REQUEST, "CAPTCHA_INCORRECT");
         }
